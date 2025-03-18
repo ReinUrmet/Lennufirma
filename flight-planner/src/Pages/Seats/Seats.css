@@ -1,0 +1,269 @@
+/* Seats.css */
+
+/* Legend */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.legendMark {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+.legendMark.vaba {
+  background-color: white;
+}
+
+.legendMark.hoivatud {
+  background-color: #f0f0f0;
+  position: relative;
+}
+
+.legendMark.hoivatud::after {
+  content: "×";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #999;
+  font-size: 14px;
+}
+
+.legendMark.soovitatud {
+  background-color: #48CAE4;
+}
+
+.legendMark.valitud {
+  background-color: #0096C7;
+}
+
+.legendMark.jalaruumiga {
+  background-color: white;
+  border: 2px solid #4CAF50;
+}
+
+.legendMark.valjapaasu {
+  background-color: white;
+  border: 2px solid #FF9800;
+}
+
+.legendMark.aknakoht {
+  background-color: white;
+  border: 2px solid #9C27B0;
+}
+
+/* Lennuki kujutis */
+.lennukiKontainer {
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lennukiNina {
+  width: 100px;
+  height: 100px;
+  border-radius: 50% 50% 0 0;
+  background-color: #f0f0f0;
+  border: 2px solid #ddd;
+  border-bottom: 0;
+  margin-bottom: -2px;
+}
+
+.lennukiKere {
+  width: 100%;
+  max-width: 800px;
+  background-color: #f0f0f0;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  padding: 2rem 1rem;
+}
+
+.lennukiSaba {
+  width: 100px;
+  height: 100px;
+  border-radius: 0 0 50% 50%;
+  background-color: #f0f0f0;
+  border: 2px solid #ddd;
+  border-top: 0;
+  margin-top: -2px;
+}
+
+/* Rida ja istekohad */
+.rida {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.jalaruumiga-rida {
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+  position: relative;
+}
+
+.jalaruumiga-rida::after {
+  content: "↔️ Väljapääs";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #FF9800;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.ridaNumber {
+  width: 30px;
+  text-align: center;
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.vahekäik {
+  width: 20px;
+}
+
+.istekoht {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin: 0 0.25rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.istekoht:hover:not(.hoivatud) {
+  background-color: #e6f7ff;
+  transform: scale(1.05);
+}
+
+.istekoht.hoivatud {
+  background-color: #f0f0f0;
+  cursor: not-allowed;
+  color: #999;
+}
+
+.istekoht.hoivatud::after {
+  content: "×";
+  position: absolute;
+  font-size: 1.2rem;
+  color: #999;
+}
+
+.istekoht.valitud {
+  background-color: #0096C7;
+  color: white;
+  border-color: #0077B6;
+}
+
+.istekoht.soovitatud {
+  background-color: #48CAE4;
+  color: white;
+  border-color: #0096C7;
+  animation: pulse 2s infinite;
+}
+
+.istekoht.jalaruumiga {
+  border: 2px solid #4CAF50;
+}
+
+.istekoht.valjapaasu {
+  border: 2px solid #FF9800;
+}
+
+.istekoht.aknakoht {
+  border: 2px solid #9C27B0;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Valitud istekohtade info */
+.valitudInfo {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.bronneeriNupp {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+  transition: background-color 0.2s;
+}
+
+.bronneeriNupp:hover:not(:disabled) {
+  background-color: #3E8E41;
+}
+
+.bronneeriNupp:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Responsiivsus istmete lehele */
+@media (max-width: 768px) {
+  .lennukiKere {
+    padding: 1rem 0.5rem;
+  }
+
+  .istekoht {
+    width: 35px;
+    height: 35px;
+    margin: 0 0.15rem;
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .istekoht {
+    width: 30px;
+    height: 30px;
+    margin: 0 0.1rem;
+    font-size: 0.6rem;
+  }
+
+  .legend {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
