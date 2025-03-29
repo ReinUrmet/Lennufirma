@@ -1,0 +1,432 @@
+/* Üldised stiilid */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f7fa;
+}
+
+/* Konteiner - uus teema */
+.flights-container {
+  background-color: #f5f7fa;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ülemine navigeerimisriba */
+.flights-header {
+  background: linear-gradient(to right, #1a5f7a, #0d2b36);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffffff;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+nav a {
+  color: #ffffff;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+nav a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+nav a.active {
+  background-color: #ffffff;
+  color: #1a5f7a;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Title section */
+.flights-title {
+  padding: 2.5rem 2rem;
+  background: linear-gradient(to right, #f0f4f8, #dbe7f3);
+  border-bottom: 1px solid #d0e1f9;
+}
+
+.flights-title h1 {
+  font-size: 2rem;
+  margin-bottom: 0.7rem;
+  color: #1a5f7a;
+  font-weight: 600;
+}
+
+.flights-title p {
+  font-size: 1rem;
+  color: #617d98;
+}
+
+/* Põhisisu */
+.flights-main {
+  flex: 1;
+  padding: 0 2rem 2rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Otsingusektsioon ja filtrid */
+.otsingusektsioon {
+  padding-top: 2rem;
+}
+
+.filters-panel {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e6eef7;
+}
+
+.filters-panel h2 {
+  margin-bottom: 1.8rem;
+  font-size: 1.3rem;
+  color: #1a5f7a;
+  position: relative;
+  padding-bottom: 0.8rem;
+}
+
+.filters-panel h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(to right, #1a5f7a, #64b5f6);
+  border-radius: 3px;
+}
+
+.filtrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.filtriRuhm {
+  flex: 1 1 250px;
+}
+
+.filtriRuhm label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.8rem;
+  color: #617d98;
+  font-size: 0.95rem;
+}
+
+.filtriRuhm input,
+.filtriRuhm select {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 1px solid #e6eef7;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #f8fafc;
+  color: #334155;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+.filtriRuhm input:focus,
+.filtriRuhm select:focus {
+  outline: none;
+  border-color: #64b5f6;
+  box-shadow: 0 0 0 3px rgba(100, 181, 246, 0.2);
+  background-color: #ffffff;
+}
+
+.filtriRuhm input::placeholder {
+  color: #a0aec0;
+}
+
+.hindRuhm {
+  max-width: 300px;
+}
+
+.hinnaVahemik {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.hinnaVahemik input {
+  flex: 1;
+  background-color: #f8fafc;
+  color: #334155;
+  border: 1px solid #e6eef7;
+}
+
+.hinnaVahemik span {
+  color: #617d98;
+  font-weight: 500;
+}
+
+/* Lennukaardid - uus disain */
+.lennukaardid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.lennukaart {
+  background-color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  color: #333;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e6eef7;
+}
+
+.lennukaart:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
+}
+
+.flight-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.2rem 1.5rem;
+  background: linear-gradient(to right, #f8fafc, #f0f4f8);
+  border-bottom: 1px solid #e6eef7;
+}
+
+.airline-name {
+  font-weight: 600;
+  color: #1a5f7a;
+  font-size: 1.1rem;
+}
+
+.flight-number {
+  color: #64748b;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.flight-times {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 1.5rem;
+}
+
+.departure, .arrival {
+  text-align: center;
+  width: 25%;
+}
+
+.time {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.4rem;
+  color: #334155;
+}
+
+.location {
+  font-size: 1rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.flight-duration {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  padding: 0 1.5rem;
+}
+
+.duration-text {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.duration-line {
+  width: 100%;
+  height: 2px;
+  background-color: #e6eef7;
+  position: relative;
+}
+
+.duration-line::before,
+.duration-line::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #1a5f7a;
+  top: -3px;
+}
+
+.duration-line::before {
+  left: 0;
+}
+
+.duration-line::after {
+  right: 0;
+}
+
+.flight-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 1.5rem;
+  background: linear-gradient(to right, #f8fafc, #f0f4f8);
+  border-top: 1px solid #e6eef7;
+}
+
+.select-label {
+  color: #1a5f7a;
+  font-size: 0.95rem;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border: 1px solid #1a5f7a;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.select-label:hover {
+  background-color: #1a5f7a;
+  color: #ffffff;
+}
+
+.price-tag {
+  text-align: right;
+}
+
+.price-label {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin-bottom: 0.3rem;
+}
+
+.price-amount {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1a5f7a;
+}
+
+/* Teade, kui pole lende */
+.teade {
+  text-align: center;
+  padding: 3rem;
+  color: #64748b;
+  background-color: #ffffff;
+  border-radius: 12px;
+  margin: 1.5rem 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e6eef7;
+  font-size: 1.1rem;
+}
+
+.teade-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #64b5f6;
+}
+
+.error {
+  background-color: #fff5f5;
+  border-left: 4px solid #f56565;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  color: #c53030;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+/* Jalus */
+.flights-footer {
+  text-align: center;
+  padding: 1.5rem;
+  background: linear-gradient(to right, #1a5f7a, #0d2b36);
+  margin-top: auto;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+}
+
+/* Responsiivsus */
+@media (max-width: 768px) {
+  .flight-times {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .departure, .arrival, .flight-duration {
+    width: 100%;
+  }
+  
+  .filters-panel {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .flights-header {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .flights-title {
+    padding: 1.5rem 1rem;
+  }
+  
+  .filtrid {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .flight-details {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+  
+  .price-tag {
+    width: 100%;
+    text-align: left;
+  }
+  
+  .select-label {
+    display: inline-block;
+    margin-top: 0.5rem;
+  }
+}
