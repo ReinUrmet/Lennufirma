@@ -1,269 +1,299 @@
-/* Seats.css */
+/* Üldised stiilid */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-/* Legend */
-.legend {
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+}
+
+/* Päis ja navigeerimisriba */
+.seats-header {
+  background: linear-gradient(135deg, #1a5f7a, #0d2b36);
+  color: white;
+  padding: 1rem 2rem;
   display: flex;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
   gap: 1rem;
-  margin-bottom: 1.5rem;
-  padding: 1rem;
-  background-color: #f9f9f9;
-  border-radius: 4px;
 }
 
-.legendItem {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
+nav a {
+  color: #fff;
+  text-decoration: none;
+  padding: 0.4rem 0.9rem;
+  border-radius: 20px;
+  transition: 0.3s;
 }
 
-.legendMark {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  border: 1px solid #ddd;
-  border-radius: 3px;
+nav a.active,
+nav a:hover {
+  background-color: #fff;
+  color: #1a5f7a;
 }
 
-.legendMark.vaba {
-  background-color: white;
+/* Title sektsioon */
+.seats-title {
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(to right, #e0effc, #f0f6fc);
+  color: #1a5f7a;
 }
 
-.legendMark.hoivatud {
-  background-color: #f0f0f0;
-  position: relative;
-}
-
-.legendMark.hoivatud::after {
-  content: "×";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #999;
-  font-size: 14px;
-}
-
-.legendMark.soovitatud {
-  background-color: #48CAE4;
-}
-
-.legendMark.valitud {
-  background-color: #0096C7;
-}
-
-.legendMark.jalaruumiga {
-  background-color: white;
-  border: 2px solid #4CAF50;
-}
-
-.legendMark.valjapaasu {
-  background-color: white;
-  border: 2px solid #FF9800;
-}
-
-.legendMark.aknakoht {
-  background-color: white;
-  border: 2px solid #9C27B0;
-}
-
-/* Lennuki kujutis */
-.lennukiKontainer {
-  margin: 2rem 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.lennukiNina {
-  width: 100px;
-  height: 100px;
-  border-radius: 50% 50% 0 0;
-  background-color: #f0f0f0;
-  border: 2px solid #ddd;
-  border-bottom: 0;
-  margin-bottom: -2px;
-}
-
-.lennukiKere {
-  width: 100%;
-  max-width: 800px;
-  background-color: #f0f0f0;
-  border: 2px solid #ddd;
-  border-radius: 5px;
-  padding: 2rem 1rem;
-}
-
-.lennukiSaba {
-  width: 100px;
-  height: 100px;
-  border-radius: 0 0 50% 50%;
-  background-color: #f0f0f0;
-  border: 2px solid #ddd;
-  border-top: 0;
-  margin-top: -2px;
-}
-
-/* Rida ja istekohad */
-.rida {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.seats-title h1 {
+  font-size: 2rem;
   margin-bottom: 0.5rem;
 }
 
-.jalaruumiga-rida {
-  margin-bottom: 2rem;
-  margin-top: 2rem;
+.seats-title p {
+  color: #4b6174;
+}
+
+/* Eelistuste paneel */
+.preferences-panel {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  padding: 1.5rem;
+  margin: 1.5rem auto;
+  max-width: 800px;
+  border: 1px solid #dfe7ef;
+}
+
+.preferences-panel h2 {
+  font-size: 1.3rem;
+  color: #1a5f7a;
+  margin-bottom: 1rem;
+}
+
+.preference-group select,
+.preference-group input {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #d0e1f9;
+  background-color: #f8fafc;
+}
+
+/* Lennuki visualisatsioon */
+.airplane-container {
+  position: relative;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  border: 1px solid #e6eef7;
+  max-width: 750px;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
   position: relative;
 }
 
-.jalaruumiga-rida::after {
-  content: "↔️ Väljapääs";
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #FF9800;
-  font-weight: bold;
-  font-size: 0.9rem;
-}
-
-.ridaNumber {
+.row-number {
   width: 30px;
   text-align: center;
-  font-weight: bold;
-  margin-right: 0.5rem;
-}
-
-.vahekäik {
-  width: 20px;
+  color: #7b8c9d;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
 }
 
 .istekoht {
   width: 40px;
   height: 40px;
+  border-radius: 6px;
+  margin: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition: all 0.2s ease;
+  border: 1px solid #d0e1f9;
+}
+
+/* Istmete olekud */
+.vaba {
+  background-color: #e8f2fb;
+}
+
+.vaba:hover {
+  background-color: #d0e1f9;
+}
+
+.hoivatud {
+  background-color: #cbd5e1;
+  cursor: not-allowed;
+}
+
+.valitud {
+  background-color: #1a5f7a;
+  color: white;
+}
+
+.soovitatud {
+  background-color: #64b5f6;
+  color: white;
+  animation: pulse 1.5s infinite;
+}
+
+/* Erilised istekohad (värvid) */
+.aknakoht {
+  border-bottom: 4px solid #4CAF50;
+}
+
+.jalaruumiga {
+  border-bottom: 4px solid #FF9800;
+}
+
+.valjapaasu {
+  border-bottom: 4px solid #E74C3C;
+}
+
+/* Vahekäik */
+.vahekäik {
+  width: 20px;
+}
+
+/* Exit indicators */
+.exit-indicator {
+  position: absolute;
+  right: -60px;
+  font-size: 0.75rem;
+  background: #f56565;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* Legend */
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  margin-top: 1rem;
+}
+
+.legend-item {
   display: flex;
   align-items: center;
-  justify-content: center;
-  border: 1px solid #ddd;
+  gap: 0.4rem;
+}
+
+.legend-mark {
+  width: 15px;
+  height: 15px;
   border-radius: 4px;
-  margin: 0 0.25rem;
-  cursor: pointer;
-  font-size: 0.8rem;
-  font-weight: 500;
-  transition: all 0.2s;
-  position: relative;
 }
 
-.istekoht:hover:not(.hoivatud) {
-  background-color: #e6f7ff;
-  transform: scale(1.05);
-}
+.legend-mark.vaba { background-color: #e8f2fb; }
+.legend-mark.hoivatud { background-color: #cbd5e1; }
+.legend-mark.soovitatud { background-color: #64b5f6; }
+.legend-mark.valitud { background-color: #1a5f7a; }
+.legend-mark.aknakoht { background-color: #4CAF50; }
+.legend-mark.jalaruumiga { background-color: #FF9800; }
+.legend-mark.valjapaasu { background-color: #E74C3C; }
 
-.istekoht.hoivatud {
-  background-color: #f0f0f0;
-  cursor: not-allowed;
-  color: #999;
-}
-
-.istekoht.hoivatud::after {
-  content: "×";
-  position: absolute;
-  font-size: 1.2rem;
-  color: #999;
-}
-
-.istekoht.valitud {
-  background-color: #0096C7;
-  color: white;
-  border-color: #0077B6;
-}
-
-.istekoht.soovitatud {
-  background-color: #48CAE4;
-  color: white;
-  border-color: #0096C7;
-  animation: pulse 2s infinite;
-}
-
-.istekoht.jalaruumiga {
-  border: 2px solid #4CAF50;
-}
-
-.istekoht.valjapaasu {
-  border: 2px solid #FF9800;
-}
-
-.istekoht.aknakoht {
-  border: 2px solid #9C27B0;
-}
-
+/* Animatsioon soovitatud kohtadele */
 @keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
 }
 
-/* Valitud istekohtade info */
-.valitudInfo {
+/* Valitud kohtade info ja broneerimisnupp */
+.selected-seats-info {
   margin-top: 2rem;
   text-align: center;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  border: 1px solid #e6eef7;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.bronneeriNupp {
-  background-color: #4CAF50;
+.selected-info {
+  font-size: 1rem;
+  color: #334155;
+  margin-bottom: 1rem;
+}
+
+.book-button {
+  background-color: #1a5f7a;
   color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
   border: none;
-  padding: 0.75rem 2rem;
-  border-radius: 4px;
   cursor: pointer;
-  font-weight: 500;
-  font-size: 1.1rem;
-  margin-top: 1rem;
-  transition: background-color 0.2s;
+  transition: 0.3s ease;
 }
 
-.bronneeriNupp:hover:not(:disabled) {
-  background-color: #3E8E41;
+.book-button:hover {
+  background-color: #164b61;
 }
 
-.bronneeriNupp:disabled {
-  background-color: #cccccc;
+.book-button:disabled {
+  background-color: #cbd5e1;
   cursor: not-allowed;
 }
 
-/* Responsiivsus istmete lehele */
-@media (max-width: 768px) {
-  .lennukiKere {
-    padding: 1rem 0.5rem;
-  }
-
-  .istekoht {
-    width: 35px;
-    height: 35px;
-    margin: 0 0.15rem;
-    font-size: 0.7rem;
-  }
+/* Jalus */
+.seats-footer {
+  text-align: center;
+  padding: 1rem;
+  background: linear-gradient(to right, #1a5f7a, #0d2b36);
+  color: white;
+  font-size: 0.9rem;
+  margin-top: 2rem;
 }
 
-@media (max-width: 576px) {
+/* Responsiivsus */
+@media (max-width: 768px) {
   .istekoht {
-    width: 30px;
-    height: 30px;
-    margin: 0 0.1rem;
-    font-size: 0.6rem;
+    width: 32px;
+    height: 32px;
+    font-size: 0.65rem;
   }
 
-  .legend {
+  .preferences-row,
+  .recommendation-actions {
     flex-direction: column;
     gap: 0.5rem;
+  }
+
+  .airplane-container {
+    padding: 1rem;
+  }
+
+  .exit-indicator {
+    right: -45px;
+    font-size: 0.6rem;
   }
 }
