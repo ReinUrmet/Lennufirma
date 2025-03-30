@@ -40,49 +40,75 @@ First, clone the repository and enter the project folder:
 ```bash
 git clone https://github.com/ReinUrmet/Lennufirma.git
 cd Lennufirma
-
-
-## Directory Structure:
-
-The backend code is located in the backend folder.
-The frontend code is located  to the backend folder:
-```
-cd backend
 ```
 
-Run the backend service using the Maven Wrapper:
+---
 
-On Linux/macOS
-```
-./mvnw spring-boot:run
-```
-On Windows
-```
-mvnw.cmd spring-boot:run
-```
-The backend server will start and listen on http://localhost:8080.
+## 📁 Directory Structure
 
-### Frontend
-Open a new terminal window or tab and navigate to the frontend folder:
-```
-cd frontend
+The project is divided into two main parts:
+
+- `backend/` – contains the backend Spring Boot code
+- `frontend/` – contains the frontend JavaScript code
+
+---
+
+## ▶️ Running the Application
+
+### ✅ Backend
+
+1. Navigate to the backend folder:
+   ```bash
+   cd backend
+   ```
+
+2. Start the backend server using the Maven Wrapper:
+
+   **On Linux/macOS:**
+   ```bash
+   ./mvnw spring-boot:run
+   ```
+
+   **On Windows:**
+   ```bash
+   mvnw.cmd spring-boot:run
+   ```
+
+3. The backend server will start and listen on:  
+   [http://localhost:8080](http://localhost:8080)
+
+---
+
+### ✅ Frontend
+
+1. Open a **new terminal window or tab**.
+
+2. Navigate to the frontend folder:
+   ```bash
+   cd frontend
+   ```
+
+3. Install frontend dependencies:
+   ```bash
+   npm install
+   ```
+
+4. Start the frontend development server:
+   ```bash
+   npm run dev
+   ```
+
+5. The frontend will be available at:  
+   [http://localhost:5137](http://localhost:5137)
+
+---
+
+## 🛠️ Troubleshooting Missing Dependencies
+
+If you encounter an error when running the frontend (e.g., missing libraries like `jspdf` or `html2canvas`), you can fix it by installing them manually:
+
+```bash
+npm install jspdf html2canvas
 ```
 
-Install project dependencies
-```
-npm install
-```
-
-Start the frontend development server:
-```
-npm run dev
-```
-The frontend will run on http://localhost:5137.is located in the frontend folder.
-
-## Running the Application
-
-### Backend
-Open a terminal and nav
-
-##Problems
-If you have problems getting the front end to work, run npm install jspdf html2canvas
+This command will add both libraries to your project’s `node_modules` and update `package.json` accordingly.
