@@ -6,7 +6,7 @@ function Seats() {
   const { flightId } = useParams();
   const navigate = useNavigate();
 
-  // State for seat map and selected seats
+  // Olekud istekohtade kaardile ja valitud istmetele
   const [seatMap, setSeatMap] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -14,7 +14,7 @@ function Seats() {
   const [reisijateArv, setReisijateArv] = useState(1);
   const [flightInfo, setFlightInfo] = useState(null);
   
-  // User preferences for seat recommendations
+  // Kasutaja eelistused istekohade soovitamiseks
   const [eelistused, setEelistused] = useState({
     aknaKoht: false,
     rohkemJalaruumi: false,
@@ -22,28 +22,28 @@ function Seats() {
     istmedKorvuti: true
   });
 
-  // Recommended seats based on preferences
+  // Soovitatud istmed eelistuste põhjal
   const [soovitusedIstmed, setSoovitusedIstmed] = useState([]);
 
   useEffect(() => {
-    // Fetch flight info
+    // Laadi lennu teave
     fetchFlightInfo();
     
-    // Fetch seat map (normally from backend)
+    // Laadi istekohtade kaart (tavaliselt backendist)
     generateSeatMap();
   }, [flightId]);
 
-  // Effect to update recommendations when preferences change
+  // Mõju, mis uuendab soovitusi, kui eelistused muutuvad
   useEffect(() => {
     if (seatMap.length > 0) {
       soovitaIstekohad();
     }
   }, [eelistused, reisijateArv, seatMap]);
 
-  // Fetch flight information
+  // Laadi lennu teave
   const fetchFlightInfo = async () => {
     try {
-      // In real app, this would be a backend call
+      // Tõelises rakenduses oleks see backendi päring
       setFlightInfo({
         id: flightId,
         origin: 'Tallinn',
@@ -59,16 +59,16 @@ function Seats() {
     }
   };
 
-  // Generate sample seat map (would come from backend in real app)
+  // Loo näidis-istekohtade kaart (tuleks tavaliselt backendist)
   const generateSeatMap = () => {
     setLoading(true);
     
     try {
-      // Generate a realistic airplane layout with 20 rows
-      // Row configuration: 3-3 (A,B,C - D,E,F)
+      // Loo realistlik lennukipaigutus 20 reaga
+      // Rea konfiguratsioon: 3-3 (A, B, C - D, E, F)
       const rows = 20;
       const seatLetters = ['A', 'B', 'C', 'D', 'E', 'F'];
-      const exitRows = [10, 11]; // Exit row placement
+      const exitRows = [10, 11]; // Väljapääsu rea paigutus
       
       let generatedMap = [];
       
@@ -76,7 +76,7 @@ function Seats() {
         let currentRow = [];
         
         for (let j = 0; j < seatLetters.length; j++) {
-          // Add aisle in the middle (between C and D)
+          // Lisa vahekäik keskel (C ja D vahele)
           if (j === 3) {
             currentRow.push({
               type: 'aisle',
@@ -86,10 +86,10 @@ function Seats() {
           
           const seatId = `${i}${seatLetters[j]}`;
           
-          // Random seat occupancy (about 40% of seats occupied)
+          // Juhuslik istekohtade hõivatus (umbes 40% istmeid hõivatud)
           const isOccupied = Math.random() < 0.4;
           
-          // Determine seat types
+          // Määratle istekohtade tüübid
           const isWindowSeat = j === 0 || j === seatLetters.length - 1;
           const isExitRowSeat = exitRows.includes(i);
           const isExtraLegroom = i === 1 || exitRows.includes(i) || i === rows;
@@ -118,16 +118,16 @@ function Seats() {
     }
   };
 
-  // Recommend seats based on user preferences
+  // Soovita istekohti kasutaja eelistuste põhjal
   const soovitaIstekohad = () => {
-    // Reset previous recommendations
+    // Lähtesta varasemad soovitused
     setSoovitusedIstmed([]);
     
     if (seatMap.length === 0) return;
     
     let availableSeats = [];
     
-    // Collect all available seats
+    // Kogu kõik vabad istmed
     seatMap.forEach(row => {
       row.forEach(seat => {
         if (seat.type !== 'aisle' && seat.status === 'vaba') {
@@ -136,7 +136,7 @@ function Seats() {
       });
     });
     
-    // Filter seats based on preferences
+    // Filtreeri istmed eelistuste põhjal
     let filteredSeats = [...availableSeats];
     
     if (eelistused.aknaKoht) {
@@ -151,12 +151,12 @@ function Seats() {
       filteredSeats = filteredSeats.filter(seat => seat.isExitRow);
     }
     
-    // Sort by row number to group seats together if needed
+    // Sorteeri rea numbri järgi, et grupeerida istmed koos, kui vajalik
     filteredSeats.sort((a, b) => a.rowNum - b.rowNum);
     
-    // For multiple passengers who want to sit together
+    // Mitme reisija korral, kes soovivad koos istuda
     if (reisijateArv > 1 && eelistused.istmedKorvuti) {
-      // Find adjacent available seats
+      // Leia kõrvuti olevad vabad istmed
       const adjacentSeats = findAdjacentSeats(filteredSeats, reisijateArv);
       if (adjacentSeats.length > 0) {
         setSoovitusedIstmed(adjacentSeats.map(seat => seat.id));
@@ -164,15 +164,15 @@ function Seats() {
       }
     }
     
-    // If no appropriate group found or single passenger
-    // Just select the best individual seats
+    // Kui sobivat gruppi ei leitud või üksik reisija
+    // Vali parimad individuaalsed istmed
     const recommendedSeats = filteredSeats.slice(0, reisijateArv);
     setSoovitusedIstmed(recommendedSeats.map(seat => seat.id));
   };
 
-  // Find adjacent available seats
+  // Leia kõrvuti olevad vabad istmed
   const findAdjacentSeats = (availableSeats, count) => {
-    // Group seats by row
+    // Grupeerige istmed ridade kaupa
     const seatsByRow = {};
     availableSeats.forEach(seat => {
       if (!seatsByRow[seat.rowNum]) {
@@ -181,27 +181,26 @@ function Seats() {
       seatsByRow[seat.rowNum].push(seat);
     });
     
-    // Look for adjacent seats in the same row
+    // Otsi kõrvuti olevaid istekohti samas reas
     for (const rowNum in seatsByRow) {
       const rowSeats = seatsByRow[rowNum];
       
-      // Sort by seat position to ensure adjacency
+      // Sorteeri istme asukoha järgi, et tagada kõrvuti olemine
       rowSeats.sort((a, b) => {
         const positions = ['A', 'B', 'C', 'D', 'E', 'F'];
         return positions.indexOf(a.position) - positions.indexOf(b.position);
       });
       
-      // Check for consecutive seats
+      // Kontrolli järjestikuseid istekohti
       for (let i = 0; i <= rowSeats.length - count; i++) {
         const positions = rowSeats.slice(i, i + count).map(s => s.position);
         
-        // Check if positions are consecutive (with aisle consideration)
+        // Jäta kontrollimata, kui ületatakse vahekäiku (C-lt D-le)
         let isConsecutive = true;
         for (let j = 1; j < positions.length; j++) {
           const curr = positions[j].charCodeAt(0);
           const prev = positions[j-1].charCodeAt(0);
           
-          // Skip checking if crossing aisle (C to D)
           if (!(prev === 'C'.charCodeAt(0) && curr === 'D'.charCodeAt(0))) {
             if (curr - prev !== 1) {
               isConsecutive = false;
@@ -216,22 +215,22 @@ function Seats() {
       }
     }
     
-    return []; // No adjacent seats found
+    return []; // Kõrvuti olevaid istekohti ei leitud
   };
 
-  // Handle preferences change
+  // Käsitle eelistuste muutumist
   const handleEelistusMuutus = (e) => {
     const { name, checked } = e.target;
     setEelistused(prev => ({ ...prev, [name]: checked }));
   };
 
-  // Handle passenger count change
+  // Käsitle reisijate arvu muutumist
   const handleReisijateArvMuutus = (e) => {
     setReisijateArv(parseInt(e.target.value) || 1);
-    setValitudIstmed([]); // Reset selected seats when passenger count changes
+    setValitudIstmed([]); // Lähtesta valitud istmed, kui reisijate arv muutub
   };
 
-  // Toggle seat selection
+  // Lülita istme valik
   const toggleIste = (seat) => {
     if (!seat || seat.type === 'aisle' || seat.status === 'hoivatud') return;
   
@@ -243,33 +242,32 @@ function Seats() {
       if (valitudIstmed.length < reisijateArv) {
         setValitudIstmed([...valitudIstmed, seatId]);
       } else {
-        // asenda varasemad valikud kui täis
+        // Asenda varasemad valikud, kui täis
         setValitudIstmed([seatId]);
       }
     }
   };
 
-  // Check if a seat is recommended
+  // Kontrolli, kas istekoht on soovitatud
   const isSeatRecommended = (seatId) => {
     return soovitusedIstmed.includes(seatId);
   };
 
-  // Apply recommendations to selection
+  // Rakenda soovitusi valikule
   const valiSoovitusedIstmed = () => {
-    // Only select up to the number of passengers
+    // Vali ainult kuni reisijate arvuni
     const selectableRecommendations = soovitusedIstmed.slice(0, reisijateArv);
     setValitudIstmed(selectableRecommendations);
   };
 
-  // Book the flight with selected seats
+  // Broneeri lennu piletid koos valitud istmetega
   const broneeriPiletid = () => {
     navigate('/booking-confirmation', {
       state: { flightInfo, valitudIstmed }
     });
   };
   
-
-  // Get class name for seat display
+  // Hangi CSS klassi nimi istme kuvamiseks
   const getSeatClass = (seat) => {
     if (!seat || seat.type === 'aisle') return 'vahekäik';
     
@@ -288,7 +286,7 @@ function Seats() {
     return classes.join(' ');
   };
 
-  // Render row number
+  // Kuvab rea numbri
   const renderRowNumber = (rowIndex) => {
     const firstSeat = seatMap[rowIndex].find(item => item.type !== 'aisle');
     return firstSeat ? firstSeat.rowNum : '';
@@ -303,7 +301,6 @@ function Seats() {
             <li><a href="/">Avaleht</a></li>
             <li><a href="/flights">Lennud</a></li>
             <li><a href="#" className="active">Istekohad</a></li>
-            <li><a href="#">Kontakt</a></li>
           </ul>
         </nav>
       </header>
@@ -324,25 +321,25 @@ function Seats() {
           <div className="error">{error}</div>
         ) : (
           <>
-            {/* Preferences section */}
+            {/* Eelistuste sektsioon */}
             <section className="preferences-section">
               <div className="preferences-panel">
                 <h2>Istekoha eelistused</h2>
                 
                 <div className="preference-options">
                   <div className="preferences-row">
-                  <div className="preference-group">
-                    <label htmlFor="reisijateArv">Reisijate arv:    </label>
-                    <select
-                      id="reisijateArv"
-                      value={reisijateArv}
-                      onChange={handleReisijateArvMuutus}
-                    >
-                      {[1,2,3,4,5,6].map(n => (
-                        <option key={n} value={n}>{n} {n === 1 ? 'reisija' : 'reisijat'}</option>
-                      ))}
-                    </select>
-                  </div>
+                    <div className="preference-group">
+                      <label htmlFor="reisijateArv">Reisijate arv: </label>
+                      <select
+                        id="reisijateArv"
+                        value={reisijateArv}
+                        onChange={handleReisijateArvMuutus}
+                      >
+                        {[1,2,3,4,5,6].map(n => (
+                          <option key={n} value={n}>{n} {n === 1 ? 'reisija' : 'reisijat'}</option>
+                        ))}
+                      </select>
+                    </div>
                     <div className="preference-group checkboxes">
                       <div className="checkbox-item">
                         <input
@@ -436,11 +433,11 @@ function Seats() {
               </div>
             </div>
             
-            {/* Airplane visualization */}
+            {/* Lennuki visualiseerimine */}
             <div className="airplane-container">
               <div className="airplane-nose"></div>
               <div className="airplane-body">
-                {/* Cabin sections */}
+                {/* Esiklass */}
                 <div className="cabin-section">
                   <div className="section-label">Esiklass</div>
                   {seatMap.slice(0, 2).map((row, rowIndex) => (
@@ -463,6 +460,7 @@ function Seats() {
                 
                 <div className="cabin-divider"></div>
                 
+                {/* Äriklass */}
                 <div className="cabin-section">
                   <div className="section-label">Äriklass</div>
                   {seatMap.slice(2, 5).map((row, rowIndex) => (
@@ -485,6 +483,7 @@ function Seats() {
                 
                 <div className="cabin-divider"></div>
                 
+                {/* Turistiklass */}
                 <div className="cabin-section">
                   <div className="section-label">Turistiklass</div>
                   {seatMap.slice(5).map((row, rowIndex) => (
@@ -504,7 +503,6 @@ function Seats() {
                           {seat && seat.type !== 'aisle' ? seat.label : ''}
                         </div>
                       ))}
-                      
                     </div>
                   ))}
                 </div>
@@ -512,7 +510,7 @@ function Seats() {
               <div className="airplane-tail"></div>
             </div>
             
-            {/* Selected seats info */}
+            {/* Valitud istekohtade info */}
             <div className="selected-seats-info">
               <div className="selected-info">
                 <p>

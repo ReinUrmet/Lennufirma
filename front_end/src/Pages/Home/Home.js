@@ -31,7 +31,6 @@ function Home() {
             <li><Link to="/" className="active">Avaleht</Link></li>
             <li><Link to="/flights">Lennud</Link></li>
             <li><Link to="#">Istekohad</Link></li>
-            <li><Link to="#">Kontakt</Link></li>
           </ul>
         </nav>
       </header>

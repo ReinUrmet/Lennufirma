@@ -92,7 +92,7 @@ nav a:hover {
   background-color: #f8fafc;
 }
 
-/* Lennuki visualisatsioon */
+/* Lennuki visualiseerimine */
 .airplane-container {
   position: relative;
   margin: 2rem auto;
@@ -262,6 +262,22 @@ nav a:hover {
 .book-button:disabled {
   background-color: #cbd5e1;
   cursor: not-allowed;
+}
+
+/* Uus stiil: Vali soovitatud istekohad nupp */
+.vali-soovitused-button {
+  background-color: #64b5f6;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+}
+
+.vali-soovitused-button:hover {
+  background-color: #42a5f5;
 }
 
 /* Jalus */
